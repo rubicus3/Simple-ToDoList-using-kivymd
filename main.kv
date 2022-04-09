@@ -1,0 +1,58 @@
+<Dialog>:
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "50dp"
+    MDTextField:
+        id: TextField
+        hint_text: 'Name'
+
+<TaskItem>:
+    LeftCheckbox:
+        id: TaskCheckBox
+
+<GroupItem>:
+    font_style: "Subtitle1"
+    on_release: root.parent.parent.parent.parent.parent.parent.fill_tasks(self.group_id)
+
+<ToDoList>:
+    MDNavigationLayout:
+        ScreenManager:
+            MDScreen:
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    MDToolbar:
+                        id: ToolBar
+                        title: "ToDoList"
+                        md_bg_color: app.theme_cls.bg_light
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open"), "Menu"]]
+                        right_action_items: [["clipboard-plus-outline", lambda x: root.add_task(), "Add Tasks"]]
+                        opposite_colors: True
+                    ScrollView:
+                        MDList:
+                            id: TaskList
+        MDNavigationDrawer:
+            id: nav_drawer
+            MDBoxLayout:
+                orientation: "vertical"
+                MDToolbar:
+                    size_hint_y: 0.08
+                    title: "List of Groups"
+                    elevation: 10
+                ScrollView:
+                    MDList:
+                        id: GroupList
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: 0.07
+                    Label:
+                    MDRectangleFlatIconButton:
+                        icon: "plus"
+                        text: "Add Group"
+                        font_style: "Button"
+                        on_release: root.add_group()
+                        line_color: app.theme_cls.bg_normal
+                    Label:
+                Label:
+                    size_hint_y: 0.01
